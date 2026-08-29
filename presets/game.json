@@ -1,0 +1,35 @@
+{
+  "id": "game",
+  "author": "Markus Lind",
+  "name": "Arcade",
+  "roles": {
+    "active": {
+      "symbol": "gamecontroller.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [0.62, 0.32, 0.98]
+    },
+    "paused": {
+      "symbol": "pause.circle.fill",
+      "systemColor": false,
+      "opacity": 0.4,
+      "pointSize": 18,
+      "color": [0.55, 0.5, 0.65]
+    },
+    "waiting": {
+      "symbol": "dice.fill",
+      "systemColor": false,
+      "opacity": 0.7,
+      "pointSize": 18,
+      "color": [0.72, 0.45, 1.0]
+    },
+    "alert": {
+      "symbol": "xmark.circle.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [0.98, 0.28, 0.38]
+    }
+  }
+}

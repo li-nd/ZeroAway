@@ -1,0 +1,35 @@
+{
+  "id": "dev",
+  "author": "Markus Lind",
+  "name": "Terminal",
+  "roles": {
+    "active": {
+      "symbol": "command",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [0.28, 0.92, 0.48]
+    },
+    "paused": {
+      "symbol": "cpu",
+      "systemColor": false,
+      "opacity": 0.4,
+      "pointSize": 18,
+      "color": [0.48, 0.55, 0.5]
+    },
+    "waiting": {
+      "symbol": "hourglass",
+      "systemColor": false,
+      "opacity": 0.65,
+      "pointSize": 18,
+      "color": [0.4, 0.82, 0.55]
+    },
+    "alert": {
+      "symbol": "exclamationmark.octagon.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [1.0, 0.28, 0.25]
+    }
+  }
+}

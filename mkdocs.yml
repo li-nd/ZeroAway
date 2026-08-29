@@ -1,0 +1,64 @@
+site_name: ZeroAway
+site_description: Keep macOS from going idle — reset system idle for presence apps
+site_url: https://zeroaway.developer.pm/
+repo_url: https://github.com/li-nd/ZeroAway
+repo_name: li-nd/ZeroAway
+copyright: Copyright © 2026 Markus Lind
+
+theme:
+  name: material
+  logo: logo.png
+  favicon: logo.png
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+
+nav:
+  - Home: index.md
+  - Install: install.md
+  - Menu bar & sessions: menu-bar.md
+  - Behavior: behavior.md
+  - Presence: presence.md
+  - Schedule: schedule.md
+  - Icons & presets: icons.md
+  - Statistics: statistics.md
+  - System: system.md
+  - Troubleshooting: troubleshooting.md
+
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+
+plugins:
+  - search
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/li-nd/ZeroAway

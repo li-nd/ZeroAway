@@ -1,0 +1,35 @@
+{
+  "id": "status",
+  "name": "Status",
+  "roles": {
+    "active": {
+      "symbol": "play.circle.fill",
+      "systemColor": true,
+      "opacity": 1.0,
+      "pointSize": 18
+    },
+    "paused": {
+      "symbol": "pause.circle",
+      "systemColor": true,
+      "opacity": 0.45,
+      "pointSize": 18
+    },
+    "waiting": {
+      "symbol": "clock.circle.fill",
+      "systemColor": true,
+      "opacity": 0.55,
+      "pointSize": 18
+    },
+    "alert": {
+      "symbol": "exclamationmark.circle.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [
+        0.95,
+        0.72,
+        0.18
+      ]
+    }
+  }
+}

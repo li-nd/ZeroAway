@@ -1,0 +1,35 @@
+{
+  "id": "neon",
+  "author": "Markus Lind",
+  "name": "Neon",
+  "roles": {
+    "active": {
+      "symbol": "sparkles",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [0.35, 1.0, 0.88]
+    },
+    "paused": {
+      "symbol": "sparkle",
+      "systemColor": false,
+      "opacity": 0.4,
+      "pointSize": 18,
+      "color": [0.55, 0.45, 0.85]
+    },
+    "waiting": {
+      "symbol": "wand.and.stars",
+      "systemColor": false,
+      "opacity": 0.75,
+      "pointSize": 18,
+      "color": [1.0, 0.35, 0.82]
+    },
+    "alert": {
+      "symbol": "rays",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [1.0, 0.92, 0.15]
+    }
+  }
+}

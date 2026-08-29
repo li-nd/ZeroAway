@@ -1,0 +1,81 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Xcode
+.derivedData/
+DerivedData/
+build/
+buildServer.json
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcarchive
+exportOptions.plist
+ExportOptions.plist
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# CocoaPods / Carthage (if added later)
+Pods/
+Carthage/Build/
+
+# GitHub Pages / MkDocs build output
+site/
+presets-catalog/
+
+# Python (local docs preview)
+.venv/
+.venv-docs/
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Editors / tooling
+*.swp
+*~
+.idea/
+*.log
+
+# Local / secrets
+*.pem
+*.p12
+*.mobileprovision
+.env
+.env.*
+!.env.example
+.netrc

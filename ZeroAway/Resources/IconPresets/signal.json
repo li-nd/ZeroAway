@@ -1,0 +1,40 @@
+{
+  "id": "signal",
+  "name": "Signal",
+  "roles": {
+    "active": {
+      "symbol": "dot.radiowaves.left.and.right",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [
+        0.28,
+        0.64,
+        0.5
+      ]
+    },
+    "paused": {
+      "symbol": "wifi",
+      "systemColor": true,
+      "opacity": 0.35,
+      "pointSize": 18
+    },
+    "waiting": {
+      "symbol": "antenna.radiowaves.left.and.right",
+      "systemColor": true,
+      "opacity": 0.5,
+      "pointSize": 18
+    },
+    "alert": {
+      "symbol": "exclamationmark.triangle.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [
+        0.95,
+        0.72,
+        0.18
+      ]
+    }
+  }
+}

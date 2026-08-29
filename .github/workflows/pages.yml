@@ -1,0 +1,96 @@
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "requirements-docs.txt"
+      - "presets/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs
+        run: pip install -r requirements-docs.txt
+
+      - name: Build documentation
+        run: mkdocs build --strict
+
+      - name: Build presets catalog into site
+        run: |
+          python3 << 'PY'
+          import json, pathlib, shutil, sys
+          root = pathlib.Path("presets")
+          if not root.exists():
+              print("presets/ missing", file=sys.stderr)
+              sys.exit(1)
+          required_roles = {"active", "paused", "waiting", "alert"}
+          presets = []
+          for path in sorted(root.glob("*.json")):
+              data = json.loads(path.read_text())
+              if not data.get("id"):
+                  raise SystemExit(f"{path.name}: missing id")
+              name = data.get("name")
+              if not isinstance(name, str) or not name.strip():
+                  raise SystemExit(f"{path.name}: name (English string) required")
+              roles = data.get("roles") or {}
+              if set(roles) != required_roles:
+                  raise SystemExit(f"{path.name}: roles must be {sorted(required_roles)}")
+              for role, style in roles.items():
+                  if not style.get("symbol"):
+                      raise SystemExit(f"{path.name}: {role}.symbol required")
+              presets.append(data)
+
+          site = pathlib.Path("site")
+          if not site.is_dir():
+              raise SystemExit("site/ missing — run mkdocs build first")
+          catalog = site / "presets-catalog"
+          presets_out = catalog / "presets"
+          if catalog.exists():
+              shutil.rmtree(catalog)
+          presets_out.mkdir(parents=True)
+          (catalog / "index.json").write_text(
+              json.dumps(presets, ensure_ascii=False, indent=2) + "\n"
+          )
+          for path in root.glob("*.json"):
+              shutil.copy(path, presets_out / path.name)
+          print(f"Added site/presets-catalog with {len(presets)} presets")
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

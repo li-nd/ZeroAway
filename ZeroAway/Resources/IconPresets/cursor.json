@@ -1,0 +1,40 @@
+{
+  "id": "cursor",
+  "name": "Cursor",
+  "roles": {
+    "active": {
+      "symbol": "cursorarrow.motionlines",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [
+        0.32,
+        0.52,
+        0.9
+      ]
+    },
+    "paused": {
+      "symbol": "cursorarrow",
+      "systemColor": true,
+      "opacity": 0.4,
+      "pointSize": 18
+    },
+    "waiting": {
+      "symbol": "hourglass",
+      "systemColor": true,
+      "opacity": 0.55,
+      "pointSize": 18
+    },
+    "alert": {
+      "symbol": "exclamationmark.circle.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [
+        0.95,
+        0.72,
+        0.18
+      ]
+    }
+  }
+}

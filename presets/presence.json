@@ -1,0 +1,35 @@
+{
+  "id": "presence",
+  "author": "Markus Lind",
+  "name": "Presence",
+  "roles": {
+    "active": {
+      "symbol": "eye.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [0.18, 0.52, 0.98]
+    },
+    "paused": {
+      "symbol": "eye.slash.fill",
+      "systemColor": false,
+      "opacity": 0.4,
+      "pointSize": 18,
+      "color": [0.52, 0.55, 0.62]
+    },
+    "waiting": {
+      "symbol": "person.crop.circle.fill",
+      "systemColor": false,
+      "opacity": 0.65,
+      "pointSize": 18,
+      "color": [0.4, 0.62, 0.95]
+    },
+    "alert": {
+      "symbol": "exclamationmark.circle.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [1.0, 0.32, 0.28]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "office",
+  "name": "Office",
+  "roles": {
+    "active": {
+      "symbol": "laptopcomputer",
+      "systemColor": true,
+      "opacity": 1.0,
+      "pointSize": 18
+    },
+    "paused": {
+      "symbol": "moon.zzz.fill",
+      "systemColor": true,
+      "opacity": 0.45,
+      "pointSize": 18
+    },
+    "waiting": {
+      "symbol": "calendar.badge.clock",
+      "systemColor": true,
+      "opacity": 0.55,
+      "pointSize": 18
+    },
+    "alert": {
+      "symbol": "exclamationmark.triangle.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [
+        0.95,
+        0.72,
+        0.18
+      ]
+    }
+  }
+}

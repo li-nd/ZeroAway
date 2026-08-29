@@ -1,0 +1,35 @@
+{
+  "id": "night",
+  "author": "Markus Lind",
+  "name": "Midnight",
+  "roles": {
+    "active": {
+      "symbol": "moon.stars.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [0.58, 0.68, 1.0]
+    },
+    "paused": {
+      "symbol": "moon.zzz.fill",
+      "systemColor": false,
+      "opacity": 0.45,
+      "pointSize": 18,
+      "color": [0.48, 0.5, 0.62]
+    },
+    "waiting": {
+      "symbol": "moonphase.full.moon",
+      "systemColor": false,
+      "opacity": 0.65,
+      "pointSize": 18,
+      "color": [0.72, 0.74, 0.95]
+    },
+    "alert": {
+      "symbol": "light.beacon.max.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [1.0, 0.72, 0.2]
+    }
+  }
+}

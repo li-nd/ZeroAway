@@ -1,0 +1,35 @@
+{
+  "id": "mouse",
+  "name": "Mouse",
+  "roles": {
+    "active": {
+      "symbol": "computermouse.fill",
+      "systemColor": true,
+      "opacity": 1.0,
+      "pointSize": 18
+    },
+    "paused": {
+      "symbol": "computermouse",
+      "systemColor": true,
+      "opacity": 0.4,
+      "pointSize": 18
+    },
+    "waiting": {
+      "symbol": "clock",
+      "systemColor": true,
+      "opacity": 0.55,
+      "pointSize": 18
+    },
+    "alert": {
+      "symbol": "exclamationmark.triangle.fill",
+      "systemColor": false,
+      "opacity": 1.0,
+      "pointSize": 18,
+      "color": [
+        0.95,
+        0.72,
+        0.18
+      ]
+    }
+  }
+}
