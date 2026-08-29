@@ -4,7 +4,7 @@
 
 ## Always
 
-No day or hour limits. While a session is on, ZeroAway runs according to Behavior and Presence only.
+No day or hour limits. While a session is on, ZeroAway runs according to Behavior and Tracked Apps only.
 
 ![Schedule — Always](screenshots/10-schedule-always.png)
 

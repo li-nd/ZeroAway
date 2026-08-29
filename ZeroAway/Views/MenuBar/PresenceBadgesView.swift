@@ -7,7 +7,7 @@ struct PresenceBadgesView: View {
     @ObservedObject private var presence = PresenceMonitor.shared
 
     var body: some View {
-        // Timed sessions ignore the presence gate — don't show waiting UI then.
+        // Timed sessions ignore the tracked-app gate — don't show waiting UI then.
         if controller.requirePresenceApp, controller.mode != .activeTimed {
             Button(action: openPresenceSettings) {
                 HStack(spacing: 8) {

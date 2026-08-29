@@ -267,13 +267,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Simulate activity only while at least one app from the Presence tab is running. Otherwise ZeroAway waits and doesn’t move the cursor."
+            "value": "Simulate activity only while at least one app from the Tracked Apps tab is running. Otherwise ZeroAway waits and doesn’t move the cursor."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Имитировать активность только пока запущено хотя бы одно приложение из вкладки «Присутствие». Иначе — ожидание, курсор не двигается."
+            "value": "Имитировать активность только пока запущено хотя бы одно приложение из вкладки «Отслеживаемые». Иначе — ожидание, курсор не двигается."
           }
         }
       }
@@ -1475,13 +1475,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Launch an app from the Presence section"
+            "value": "Launch an app from Tracked Apps"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Запустите приложение из раздела «Присутствие»"
+            "value": "Запустите приложение из раздела «Отслеживаемые»"
           }
         }
       }
@@ -1730,13 +1730,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open Presence settings"
+            "value": "Open Tracked Apps settings"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Открыть настройки присутствия"
+            "value": "Открыть настройки отслеживаемых приложений"
           }
         }
       }
@@ -2291,13 +2291,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Presence"
+            "value": "Tracked Apps"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Присутствие"
+            "value": "Отслеживаемые приложения"
           }
         }
       }
@@ -2954,13 +2954,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Presence"
+            "value": "Tracked Apps"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Присутствие"
+            "value": "Отслеживаемые"
           }
         }
       }

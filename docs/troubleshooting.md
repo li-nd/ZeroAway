@@ -18,7 +18,7 @@ See [Install](install.md) and [System](system.md).
 
 ## Status stays “Waiting”
 
-**No tracked app running** — Presence gate is on, but Slack/Teams/etc. aren’t open (or aren’t tracked). Open a tracked app or turn off **Only while an app is running**. See [Presence](presence.md).
+**No tracked app running** — the Tracked Apps gate is on, but Slack/Teams/etc. aren’t open (or aren’t tracked). Open a tracked app or turn off **Only while an app is running**. See [Tracked Apps](tracked-apps.md).
 
 **Outside schedule** — Schedule mode is on and you’re outside work hours. Wait for the next window, switch Schedule to **Always**, or use a **timed** 1h/4h/8h session (those ignore the schedule). See [Schedule](schedule.md).
 

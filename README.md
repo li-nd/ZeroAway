@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Reset system idle. Stay available.</strong><br />
-  Native macOS menu bar app — nudge the cursor when idle so presence apps don’t mark you away.
+  Native macOS menu bar app — nudge the cursor when idle so Slack, Teams, and similar apps don’t mark you away.
 </p>
 
 <p align="center">
@@ -18,18 +18,55 @@
 
 ---
 
-![Menu bar — running](docs/screenshots/1-main-running.png)
+<p align="center">
+  <img src="docs/social.png" alt="ZeroAway — menu bar sessions, Tracked Apps, Behavior, Statistics, Icons" width="900" />
+</p>
 
 ## Features
 
 | | |
 |---|---|
 | **Sessions** | On/Off from the menu bar · Always (∞) or 1h / 4h / 8h with countdown |
-| **Behavior** | Idle timeout · cursor nudge · schedule & presence gates · resume on launch |
-| **Presence** | Track Slack, Teams, Mattermost, or any app by Bundle ID |
+| **Behavior** | Idle timeout · cursor nudge · schedule & tracked-app gates · resume on launch |
+| **Tracked Apps** | Track Slack, Teams, Mattermost, or any app by Bundle ID |
 | **Schedule** | Work days and hours · timed sessions ignore the schedule |
 | **Icons** | Role-based presets · online catalog · export / import / contribute via PR |
 | **Statistics** | Optional local nudge & session history — nothing leaves this Mac |
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/7-tracked-apps.png" alt="Tracked Apps" /><br />
+      <sub><b>Tracked Apps</b> — Slack, Teams, Mattermost, or any Bundle ID</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/13-icons-presets.png" alt="Icon presets" /><br />
+      <sub><b>Icons</b> — role-based presets and catalog</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/6-behavior.png" alt="Behavior" /><br />
+      <sub><b>Behavior</b> — idle timeout, nudge, schedule &amp; app gates</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/16-statistics.png" alt="Statistics" /><br />
+      <sub><b>Statistics</b> — local history, stays on your Mac</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/10-schedule-always.png" alt="Schedule" /><br />
+      <sub><b>Schedule</b> — always on, or work days &amp; hours</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/15-icons-edit.png" alt="Preset editor" /><br />
+      <sub><b>Preset editor</b> — icons per Active / Paused / Waiting / Alert</sub>
+    </td>
+  </tr>
+</table>
 
 ## Install
 
@@ -43,28 +80,7 @@ Tap: [li-nd/homebrew-apps](https://github.com/li-nd/homebrew-apps). Or download 
 
 > Builds are **not notarized** (ad-hoc signed). If macOS blocks the app: **System Settings → Privacy & Security → Open Anyway**, or right-click → **Open**.
 
-**Accessibility** is required. Allow ZeroAway under Privacy & Security → Accessibility, then use **Check again** in the app.
-
-## Screenshots
-
-<table>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/2-main-running-timed.png" alt="Timed session" /></td>
-    <td width="50%"><img src="docs/screenshots/5-menubar-status.png" alt="Menu bar status" /></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/6-behavior.png" alt="Behavior" /></td>
-    <td width="50%"><img src="docs/screenshots/7-presence.png" alt="Presence" /></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/14-icons-catalog.png" alt="Icon catalog" /></td>
-    <td width="50%"><img src="docs/screenshots/16-statistics.png" alt="Statistics" /></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/11-schedule-day-settings.png" alt="Schedule" /></td>
-    <td width="50%"><img src="docs/screenshots/18-accessibility.png" alt="Accessibility" /></td>
-  </tr>
-</table>
+**Accessibility** is required (see [Install](https://zeroaway.developer.pm/install/)) — allow ZeroAway under Privacy & Security → Accessibility, then **Check again** in the app.
 
 ## Build
 
@@ -80,7 +96,7 @@ Published site: **[zeroaway.developer.pm](https://zeroaway.developer.pm/)**
 | [Install](https://zeroaway.developer.pm/install/) | Homebrew, Releases, build from source |
 | [Menu bar](https://zeroaway.developer.pm/menu-bar/) | Sessions and status |
 | [Behavior](https://zeroaway.developer.pm/behavior/) | Idle, nudge, gates |
-| [Presence](https://zeroaway.developer.pm/presence/) | Tracked apps |
+| [Tracked Apps](https://zeroaway.developer.pm/tracked-apps/) | Tracked apps |
 | [Schedule](https://zeroaway.developer.pm/schedule/) | Work hours |
 | [Icons](https://zeroaway.developer.pm/icons/) | Catalog, sharing, PRs |
 | [Statistics](https://zeroaway.developer.pm/statistics/) | Local history |

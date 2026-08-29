@@ -6,7 +6,7 @@ ZeroAway lives in the macOS menu bar. Click its status item to open the popover 
 
 ## Running (Always)
 
-With Accessibility granted and a session on, the popover shows **Running**, an idle/activity gauge, session chips, and Presence badges when apps are tracked.
+With Accessibility granted and a session on, the popover shows **Running**, an idle/activity gauge, session chips, and Tracked Apps badges when apps are tracked.
 
 ![Running — Always](screenshots/1-main-running.png)
 
@@ -31,7 +31,7 @@ When the session is **Off**, status is **Paused**. The gauge shows idle at zero;
 
 ## Waiting
 
-**Waiting** means a session is on, but a gate is blocking nudges — for example **Only while an app is running** and no tracked app is open. The popover explains why and links to Presence settings.
+**Waiting** means a session is on, but a gate is blocking nudges — for example **Only while an app is running** and no tracked app is open. The popover explains why and links to Tracked Apps settings.
 
 ![Waiting for a tracked app](screenshots/4-main-waiting.png)
 
@@ -45,5 +45,5 @@ You can also wait because the [schedule](schedule.md) says you’re outside work
 ## Related
 
 - [Behavior](behavior.md) — idle timeout and gates  
-- [Presence](presence.md) — which apps count as “running”  
+- [Tracked Apps](tracked-apps.md) — which apps count as “running”  
 - [System](system.md) — hotkey to toggle the session  

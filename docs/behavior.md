@@ -23,7 +23,7 @@ The Behavior card shows the next start (or that the schedule condition is met).
 
 ## Only while an app is running
 
-When enabled, ZeroAway nudges only if at least one app from [Presence](presence.md) is running. Otherwise it waits and does not move the cursor.
+When enabled, ZeroAway nudges only if at least one app from [Tracked Apps](tracked-apps.md) is running. Otherwise it waits and does not move the cursor.
 
 Live status under the toggle shows which tracked apps are running.
 
@@ -35,4 +35,4 @@ If a session was active when ZeroAway quit, start it again on launch. Timed sess
 
 - [Menu bar & sessions](menu-bar.md)  
 - [Schedule](schedule.md)  
-- [Presence](presence.md)  
+- [Tracked Apps](tracked-apps.md)  

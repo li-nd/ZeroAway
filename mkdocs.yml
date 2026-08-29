@@ -1,5 +1,5 @@
 site_name: ZeroAway
-site_description: Keep macOS from going idle — reset system idle for presence apps
+site_description: Keep macOS from going idle — reset system idle so messaging apps don’t mark you away
 site_url: https://zeroaway.developer.pm/
 repo_url: https://github.com/li-nd/ZeroAway
 repo_name: li-nd/ZeroAway
@@ -35,7 +35,7 @@ nav:
   - Install: install.md
   - Menu bar & sessions: menu-bar.md
   - Behavior: behavior.md
-  - Presence: presence.md
+  - Tracked Apps: tracked-apps.md
   - Schedule: schedule.md
   - Icons & presets: icons.md
   - Statistics: statistics.md

@@ -5,9 +5,11 @@
 # ZeroAway
 
 **Reset system idle. Stay available.**  
-A native macOS menu bar app that nudges the cursor when you’re idle so presence apps (Slack, Teams, and similar) don’t mark you away — with schedule, presence gates, icon presets, and local stats.
+A native macOS menu bar app that nudges the cursor when you’re idle so Slack, Teams, and similar apps don’t mark you away — with schedule, tracked-app gates, icon presets, and local stats.
 
-![Menu bar — running](screenshots/1-main-running.png)
+<p align="center">
+  <img src="social.png" alt="ZeroAway — menu bar sessions, Tracked Apps, Behavior, Statistics, Icons" width="900" />
+</p>
 
 ## Features
 
@@ -15,7 +17,7 @@ A native macOS menu bar app that nudges the cursor when you’re idle so presenc
 |---------|----------------|
 | **[Menu bar & sessions](menu-bar.md)** | Turn a session On/Off from the menu bar. Choose Always (∞) or a timed run (1h / 4h / 8h) with a live countdown. |
 | **[Behavior](behavior.md)** | Set idle timeout and cursor nudge size. Optionally require a work schedule and/or a tracked app before nudging. Resume the last session on launch. |
-| **[Presence](presence.md)** | Track Slack, Teams, Mattermost, or any Mac app by Bundle ID. When the gate is on, ZeroAway waits until at least one tracked app is running. |
+| **[Tracked Apps](tracked-apps.md)** | Track Slack, Teams, Mattermost, or any Mac app by Bundle ID. When the gate is on, ZeroAway waits until at least one tracked app is running. |
 | **[Schedule](schedule.md)** | Limit activity to work days and hours (same hours every day, or per-day ranges). Timed sessions ignore the schedule until the timer ends. |
 | **[Icons & presets](icons.md)** | Customize menu bar icons per role (Active, Paused, Waiting, Alert). Use built-in sets, the online catalog, or share JSON presets — including pull requests to the public catalog. |
 | **[Statistics](statistics.md)** | Optional local history of nudges and sessions. Charts stay on your Mac; nothing is uploaded. |
@@ -36,7 +38,7 @@ Then read [Menu bar & sessions](menu-bar.md) for everyday controls.
 | [Install](install.md) | Homebrew, Releases, build from source |
 | [Menu bar & sessions](menu-bar.md) | Popover, durations, status |
 | [Behavior](behavior.md) | Idle, nudge, gates, resume |
-| [Presence](presence.md) | Tracked apps and Bundle IDs |
+| [Tracked Apps](tracked-apps.md) | Tracked apps and Bundle IDs |
 | [Schedule](schedule.md) | Always vs work hours |
 | [Icons & presets](icons.md) | Catalog, sharing, contributing |
 | [Statistics](statistics.md) | Local usage history |
