@@ -71,7 +71,7 @@ struct PresenceAppEditorView: View {
     private var editorToolbar: some View {
         HStack(spacing: 12) {
             Button(action: onBack) {
-                Label(L("settings.presence"), systemImage: "chevron.left")
+                Label(L("settings.presence"), systemImage: "chevron.backward")
             }
             .buttonStyle(.borderless)
 

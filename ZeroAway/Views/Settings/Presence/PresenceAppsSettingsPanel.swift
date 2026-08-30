@@ -161,7 +161,7 @@ struct PresenceAppsSettingsPanel: View {
 
                     Spacer(minLength: 8)
 
-                    Image(systemName: "chevron.right")
+                    Image(systemName: "chevron.forward")
                         .font(.system(size: 11, weight: .semibold))
                         .foregroundStyle(.tertiary)
                 }

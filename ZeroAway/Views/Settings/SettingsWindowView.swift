@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsWindowView: View {
     @EnvironmentObject private var controller: AppController
     @EnvironmentObject private var launchAtLogin: LaunchAtLoginService
+    @EnvironmentObject private var languageSettings: AppLanguageSettings
     @State private var section: Section? = .behavior
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
@@ -53,6 +54,7 @@ struct SettingsWindowView: View {
         }
         .navigationSplitViewStyle(.balanced)
         .frame(minWidth: 960, minHeight: 700)
+        .environment(\.locale, languageSettings.locale)
         .onReceive(NotificationCenter.default.publisher(for: .openSettingsSection)) { note in
             if let raw = note.userInfo?["section"] as? String,
                let target = Section(rawValue: raw) {

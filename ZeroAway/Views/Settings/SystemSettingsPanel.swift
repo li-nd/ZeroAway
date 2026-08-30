@@ -36,10 +36,10 @@ struct SystemSettingsPanel: View {
                         ) {
                             Text(L("system.language.system"))
                                 .tag(AppLanguageSettings.Preference.system)
-                            Text("English")
-                                .tag(AppLanguageSettings.Preference.english)
-                            Text("Русский")
-                                .tag(AppLanguageSettings.Preference.russian)
+                            ForEach(AppLanguageSettings.Preference.allCases.filter { $0 != .system }) { pref in
+                                Text(pref.displayName)
+                                    .tag(pref)
+                            }
                         }
                         .labelsHidden()
                         .pickerStyle(.menu)

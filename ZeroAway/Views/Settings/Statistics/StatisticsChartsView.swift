@@ -65,7 +65,7 @@ struct StatisticsChartsView: View {
             Button {
                 shiftFocusedDay(by: -1)
             } label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: "chevron.backward")
             }
             .buttonStyle(.borderless)
             .disabled(focusedDay <= earliestAllowedDay)
@@ -82,7 +82,7 @@ struct StatisticsChartsView: View {
             Button {
                 shiftFocusedDay(by: 1)
             } label: {
-                Image(systemName: "chevron.right")
+                Image(systemName: "chevron.forward")
             }
             .buttonStyle(.borderless)
             .disabled(focusedDay >= latestAllowedDay)

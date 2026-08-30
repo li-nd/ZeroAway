@@ -51,7 +51,7 @@ struct PresenceBadgesView: View {
 
                     Spacer(minLength: 4)
 
-                    Image(systemName: "chevron.right")
+                    Image(systemName: "chevron.forward")
                         .font(.system(size: 9, weight: .semibold))
                         .foregroundStyle(.tertiary)
                 }

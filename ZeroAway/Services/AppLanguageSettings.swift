@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import SwiftUI
 
 /// In-app language preference. Default follows the macOS language.
 @MainActor
@@ -10,6 +11,25 @@ final class AppLanguageSettings: ObservableObject {
         case system
         case english
         case russian
+        case german
+        case french
+        case spanish
+        case portugueseBrazil
+        case italian
+        case dutch
+        case polish
+        case czech
+        case romanian
+        case turkish
+        case ukrainian
+        case japanese
+        case chineseSimplified
+        case korean
+        case arabic
+        case hebrew
+        case persian
+        case vietnamese
+        case indonesian
 
         var id: String { rawValue }
 
@@ -19,24 +39,74 @@ final class AppLanguageSettings: ObservableObject {
             case .system: return nil
             case .english: return "en"
             case .russian: return "ru"
+            case .german: return "de"
+            case .french: return "fr"
+            case .spanish: return "es"
+            case .portugueseBrazil: return "pt-BR"
+            case .italian: return "it"
+            case .dutch: return "nl"
+            case .polish: return "pl"
+            case .czech: return "cs"
+            case .romanian: return "ro"
+            case .turkish: return "tr"
+            case .ukrainian: return "uk"
+            case .japanese: return "ja"
+            case .chineseSimplified: return "zh-Hans"
+            case .korean: return "ko"
+            case .arabic: return "ar"
+            case .hebrew: return "he"
+            case .persian: return "fa"
+            case .vietnamese: return "vi"
+            case .indonesian: return "id"
+            }
+        }
+
+        /// Native language name for the picker (not localized).
+        var displayName: String {
+            switch self {
+            case .system: return "" // use L("system.language.system")
+            case .english: return "English"
+            case .russian: return "Русский"
+            case .german: return "Deutsch"
+            case .french: return "Français"
+            case .spanish: return "Español"
+            case .portugueseBrazil: return "Português"
+            case .italian: return "Italiano"
+            case .dutch: return "Nederlands"
+            case .polish: return "Polski"
+            case .czech: return "Čeština"
+            case .romanian: return "Română"
+            case .turkish: return "Türkçe"
+            case .ukrainian: return "Українська"
+            case .japanese: return "日本語"
+            case .chineseSimplified: return "中文"
+            case .korean: return "한국어"
+            case .arabic: return "العربية"
+            case .hebrew: return "עברית"
+            case .persian: return "فارسی"
+            case .vietnamese: return "Tiếng Việt"
+            case .indonesian: return "Bahasa Indonesia"
             }
         }
     }
 
     private static let storageKey = "appLanguage.preference"
-    private static let supportedLanguageCodes = ["en", "ru"]
 
     @Published private(set) var preference: Preference
 
-    /// Locale used for formatting and SwiftUI environment.
+    /// Locale for SwiftUI / formatters. System uses macOS preferred language (not the process cache).
     var locale: Locale {
-        Locale(identifier: resolvedLanguageCode)
+        if let code = preference.languageCode {
+            return Locale(identifier: code)
+        }
+        if let systemID = Self.systemLanguageCodes.first {
+            return Locale(identifier: systemID)
+        }
+        return Locale(identifier: Self.preferredCatalogCode())
     }
 
     /// Stable id to force SwiftUI view refresh when language changes.
-    var refreshID: String {
-        "\(preference.rawValue):\(resolvedLanguageCode)"
-    }
+    var refreshID: String { preference.rawValue }
 
     private init() {
         let raw = UserDefaults.standard.string(forKey: Self.storageKey) ?? Preference.system.rawValue
@@ -51,31 +121,27 @@ final class AppLanguageSettings: ObservableObject {
         apply()
     }
 
-    private var resolvedLanguageCode: String {
-        if let code = preference.languageCode {
-            return code
-        }
-        return Self.bestSupportedCode(from: Self.systemLanguageCodes)
-    }
-
     private func apply() {
-        let code = resolvedLanguageCode
-        let locale = Locale(identifier: code)
-
-        if preference.languageCode != nil {
+        if let code = preference.languageCode {
             UserDefaults.standard.set([code], forKey: "AppleLanguages")
+            AppLocale.languageCode = code
+            AppLocale.current = Locale(identifier: code)
         } else {
+            // Drop the override so the *next* launch follows macOS. This process
+            // keeps the old AppleLanguages cache, so strings still load via an
+            // explicit .lproj from Apple's preferredLocalizations matcher.
             UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+            let code = Self.preferredCatalogCode()
+            AppLocale.languageCode = code
+            AppLocale.current = locale
         }
 
-        AppLocale.current = locale
-        AppLocale.languageCode = code
         LocalizationBundle.refresh()
         DurationFormat.setLocale(locale)
         objectWillChange.send()
     }
 
-    /// System UI languages ignoring this app’s `AppleLanguages` override.
+    /// System UI languages, ignoring this app’s `AppleLanguages` override.
     private static var systemLanguageCodes: [String] {
         let global = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain)
         if let languages = global?["AppleLanguages"] as? [String], !languages.isEmpty {
@@ -84,17 +150,11 @@ final class AppLanguageSettings: ObservableObject {
         return Locale.preferredLanguages
     }
 
-    private static func bestSupportedCode(from preferred: [String]) -> String {
-        for raw in preferred {
-            let code = Locale(identifier: raw).language.languageCode?.identifier ?? raw
-            if supportedLanguageCodes.contains(code) {
-                return code
-            }
-            if let match = supportedLanguageCodes.first(where: { raw.hasPrefix($0) }) {
-                return match
-            }
-        }
-        return "en"
+    /// Catalog code Apple would pick for the current macOS language list.
+    private static func preferredCatalogCode() -> String {
+        let available = Bundle.main.localizations.filter { $0 != "Base" }
+        let preferred = systemLanguageCodes
+        return Bundle.preferredLocalizations(from: available, forPreferences: preferred).first ?? "en"
     }
 }
 
@@ -119,11 +179,15 @@ enum LocalizationBundle {
         if code == cachedCode {
             return cachedBundle
         }
-        if let path = Bundle.main.path(forResource: code, ofType: "lproj"),
-           let bundle = Bundle(path: path) {
-            cachedBundle = bundle
-            cachedCode = code
-            return bundle
+        // Try exact code (e.g. pt-BR), then language-only (pt).
+        let candidates = [code, code.split(separator: "-").first.map(String.init)].compactMap { $0 }
+        for candidate in candidates {
+            if let path = Bundle.main.path(forResource: candidate, ofType: "lproj"),
+               let bundle = Bundle(path: path) {
+                cachedBundle = bundle
+                cachedCode = code
+                return bundle
+            }
         }
         cachedBundle = .main
         cachedCode = code

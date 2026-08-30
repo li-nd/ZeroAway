@@ -38,7 +38,6 @@ struct ZeroAwayApp: App {
                 .environmentObject(languageSettings)
                 .environmentObject(usageStats)
                 .environment(\.locale, languageSettings.locale)
-                .id(languageSettings.refreshID)
         }
         .defaultSize(width: 960, height: 700)
         .windowToolbarStyle(.unified)
