@@ -30,14 +30,16 @@ enum StatsChartPeriod: Int, CaseIterable, Identifiable {
     case days7 = 7
     case days30 = 30
     case days90 = 90
+    case days180 = 180
 
     var id: Int { rawValue }
 
     var label: String {
         switch self {
         case .days7: return L("stats.period.7d")
-        case .days30: return L("stats.period.30d")
-        case .days90: return L("stats.period.90d")
+        case .days30: return L("stats.period.1m")
+        case .days90: return L("stats.period.3m")
+        case .days180: return L("stats.period.6m")
         }
     }
 }
@@ -52,8 +54,14 @@ struct UsageSessionRecord: Identifiable, Codable, Equatable {
     /// Timestamps of individual nudges (for hourly breakdown). May be empty on legacy records.
     var nudgeTimes: [Date]
     var endReason: SessionEndReason?
+    /// Seconds the session was "active" (screen unlocked). `nil` = legacy wall-clock only.
+    var activeSeconds: Int?
 
+    /// Prefer accumulated active time; fall back to wall-clock for legacy records.
     var elapsedSeconds: TimeInterval {
+        if let activeSeconds {
+            return Double(max(0, activeSeconds))
+        }
         let end = endedAt ?? Date()
         return max(0, end.timeIntervalSince(startedAt))
     }
@@ -61,7 +69,7 @@ struct UsageSessionRecord: Identifiable, Codable, Equatable {
     var isOpen: Bool { endedAt == nil }
 
     enum CodingKeys: String, CodingKey {
-        case id, startedAt, endedAt, durationPreset, nudgeCount, nudgeTimes, endReason
+        case id, startedAt, endedAt, durationPreset, nudgeCount, nudgeTimes, endReason, activeSeconds
     }
 
     init(
@@ -71,7 +79,8 @@ struct UsageSessionRecord: Identifiable, Codable, Equatable {
         durationPreset: String,
         nudgeCount: Int,
         nudgeTimes: [Date] = [],
-        endReason: SessionEndReason?
+        endReason: SessionEndReason?,
+        activeSeconds: Int? = 0
     ) {
         self.id = id
         self.startedAt = startedAt
@@ -80,6 +89,7 @@ struct UsageSessionRecord: Identifiable, Codable, Equatable {
         self.nudgeCount = nudgeCount
         self.nudgeTimes = nudgeTimes
         self.endReason = endReason
+        self.activeSeconds = activeSeconds
     }
 
     init(from decoder: Decoder) throws {
@@ -92,6 +102,19 @@ struct UsageSessionRecord: Identifiable, Codable, Equatable {
         let storedCount = try c.decodeIfPresent(Int.self, forKey: .nudgeCount) ?? 0
         nudgeCount = max(storedCount, nudgeTimes.count)
         endReason = try c.decodeIfPresent(SessionEndReason.self, forKey: .endReason)
+        activeSeconds = try c.decodeIfPresent(Int.self, forKey: .activeSeconds)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(id, forKey: .id)
+        try c.encode(startedAt, forKey: .startedAt)
+        try c.encodeIfPresent(endedAt, forKey: .endedAt)
+        try c.encode(durationPreset, forKey: .durationPreset)
+        try c.encode(nudgeCount, forKey: .nudgeCount)
+        try c.encode(nudgeTimes, forKey: .nudgeTimes)
+        try c.encodeIfPresent(endReason, forKey: .endReason)
+        try c.encodeIfPresent(activeSeconds, forKey: .activeSeconds)
     }
 }
 

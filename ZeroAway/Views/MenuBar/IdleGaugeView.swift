@@ -50,7 +50,9 @@ struct IdleGaugeView: View {
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
                     .modifier(OptionalMonospacedDigits(
-                        enabled: !controller.isWaitingForSchedule && !controller.isWaitingForPresence
+                        enabled: !controller.isWaitingForScreenLock
+                            && !controller.isWaitingForSchedule
+                            && !controller.isWaitingForPresence
                     ))
             }
         }
@@ -73,6 +75,9 @@ struct IdleGaugeView: View {
     }
 
     private var caption: String? {
+        if controller.isWaitingForScreenLock {
+            return L("menubar.caption.screen_lock")
+        }
         if controller.isWaitingForSchedule {
             return controller.scheduleStatusLine
         }

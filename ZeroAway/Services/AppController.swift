@@ -25,9 +25,11 @@ final class AppController: ObservableObject {
     // MARK: Published
 
     @Published private(set) var mode: Mode = .paused
-    @Published private(set) var timerEnd: Date?
+    /// Remaining active (unlocked) seconds for a timed session.
+    @Published private(set) var timedRemainingSeconds: TimeInterval?
     @Published private(set) var idleSeconds: Int = 0
     @Published private(set) var isTrusted: Bool = AccessibilityService.isTrusted()
+    @Published private(set) var isScreenLocked: Bool = ScreenLockMonitor.isLocked()
     @Published private(set) var nudgeBlocked: Bool = false
     @Published private(set) var lastNudgeDate: Date?
 
@@ -73,7 +75,7 @@ final class AppController: ObservableObject {
         }
     }
 
-    /// When enabled, an active session is restored after quit / reboot (timed sessions keep the original end time).
+    /// When enabled, an active session is restored after quit / reboot (timed sessions keep remaining active time).
     @Published var resumeSessionOnLaunch: Bool {
         didSet {
             UserDefaults.standard.set(resumeSessionOnLaunch, forKey: Keys.resumeSessionOnLaunch)
@@ -87,17 +89,21 @@ final class AppController: ObservableObject {
         if !isTrusted { return .setup }
         if isNotWorking { return .broken }
         if !isActive { return .paused }
-        if isWaitingForSchedule || isWaitingForPresence { return .waiting }
+        if isWaitingForScreenLock || isWaitingForSchedule || isWaitingForPresence { return .waiting }
         return .active
     }
 
+    var isWaitingForScreenLock: Bool {
+        isActive && isScreenLocked
+    }
+
     var isWaitingForSchedule: Bool {
-        guard isActive, mode != .activeTimed, workSchedule.enabled else { return false }
+        guard isActive, !isScreenLocked, mode != .activeTimed, workSchedule.enabled else { return false }
         return !ScheduleEvaluator.isWithin(schedule: workSchedule)
     }
 
     var isWaitingForPresence: Bool {
-        guard isActive, requirePresenceApp, mode != .activeTimed else { return false }
+        guard isActive, !isScreenLocked, requirePresenceApp, mode != .activeTimed else { return false }
         return !PresenceMonitor.shared.isAnyEnabledAppRunning
     }
 
@@ -117,8 +123,8 @@ final class AppController: ObservableObject {
     }
 
     var remainingTimedSeconds: TimeInterval? {
-        guard mode == .activeTimed, let end = timerEnd else { return nil }
-        return max(0, end.timeIntervalSinceNow)
+        guard mode == .activeTimed, let remaining = timedRemainingSeconds else { return nil }
+        return max(0, remaining)
     }
 
     // MARK: Private
@@ -130,17 +136,22 @@ final class AppController: ObservableObject {
         static let requirePresenceApp = "requirePresenceApp"
         static let resumeSessionOnLaunch = "resumeSessionOnLaunch"
         static let sessionWasActive = "sessionWasActive"
+        static let sessionTimerRemaining = "sessionTimerRemaining"
+        /// Legacy absolute end date — migrated to remaining on restore.
         static let sessionTimerEnd = "sessionTimerEnd"
     }
 
     private let displayAssertion = DisplayAssertion()
     private var timer: Timer?
     private var wakeObserver: NSObjectProtocol?
+    private var lockObserver: NSObjectProtocol?
+    private var unlockObserver: NSObjectProtocol?
     private var notifiedExpiry = false
 
     private var awaitingNudgeVerify = false
     private var idleAtNudge = 0
     private var nudgeFailureStreak = 0
+    private var lastTimedPersist = Date.distantPast
 
     private init() {
         let raw = UserDefaults.standard.string(forKey: Keys.duration) ?? SessionDuration.always.rawValue
@@ -159,8 +170,9 @@ final class AppController: ObservableObject {
         resumeSessionOnLaunch = UserDefaults.standard.object(forKey: Keys.resumeSessionOnLaunch) as? Bool ?? true
 
         mode = .paused
-        timerEnd = nil
+        timedRemainingSeconds = nil
         observeWake()
+        observeScreenLock()
         startTicking()
         restoreSessionIfNeeded()
     }
@@ -171,17 +183,13 @@ final class AppController: ObservableObject {
         if isActive { pause() } else { activate() }
     }
 
-    func activate(restoringEnd: Date? = nil) {
+    func activate(restoringRemaining: TimeInterval? = nil) {
         if let secs = duration.seconds {
             mode = .activeTimed
-            if let restoringEnd {
-                timerEnd = restoringEnd
-            } else {
-                timerEnd = Date().addingTimeInterval(secs)
-            }
+            timedRemainingSeconds = restoringRemaining ?? secs
         } else {
             mode = .activeAlways
-            timerEnd = nil
+            timedRemainingSeconds = nil
         }
         notifiedExpiry = false
         resetNudgeVerification()
@@ -193,7 +201,7 @@ final class AppController: ObservableObject {
     func pause(endReason: SessionEndReason = .manual) {
         UsageStatsStore.shared.endSession(reason: endReason)
         mode = .paused
-        timerEnd = nil
+        timedRemainingSeconds = nil
         resetNudgeVerification()
         persistSessionState()
         reconcilePowerAssertion()
@@ -243,13 +251,24 @@ final class AppController: ObservableObject {
 
     private func tick() {
         isTrusted = AccessibilityService.isTrusted()
+        // Notifications are primary; probe keeps state honest after sleep/wake races.
+        let locked = ScreenLockMonitor.isLocked()
+        if locked != isScreenLocked {
+            setScreenLocked(locked)
+        }
+
         let currentIdle = Int(IdleMonitor.idleSeconds())
         idleSeconds = currentIdle
         PresenceMonitor.shared.refresh()
 
         verifyLastNudge()
 
-        if expireIfNeeded() { return }
+        if isActive && !isScreenLocked {
+            UsageStatsStore.shared.tickActiveSecond()
+            if mode == .activeTimed {
+                if expireTimedSessionIfNeeded() { return }
+            }
+        }
 
         reconcilePowerAssertion()
 
@@ -284,11 +303,12 @@ final class AppController: ObservableObject {
     private func persistSessionState() {
         let defaults = UserDefaults.standard
         defaults.set(isActive, forKey: Keys.sessionWasActive)
-        if let timerEnd {
-            defaults.set(timerEnd.timeIntervalSince1970, forKey: Keys.sessionTimerEnd)
+        if let remaining = timedRemainingSeconds {
+            defaults.set(remaining, forKey: Keys.sessionTimerRemaining)
         } else {
-            defaults.removeObject(forKey: Keys.sessionTimerEnd)
+            defaults.removeObject(forKey: Keys.sessionTimerRemaining)
         }
+        defaults.removeObject(forKey: Keys.sessionTimerEnd)
     }
 
     private func restoreSessionIfNeeded() {
@@ -296,28 +316,42 @@ final class AppController: ObservableObject {
         guard UserDefaults.standard.bool(forKey: Keys.sessionWasActive) else { return }
 
         if duration.seconds != nil {
-            let rawEnd = UserDefaults.standard.double(forKey: Keys.sessionTimerEnd)
-            guard rawEnd > 0 else {
-                persistSessionState()
-                return
+            let defaults = UserDefaults.standard
+            let remaining: TimeInterval
+            if defaults.object(forKey: Keys.sessionTimerRemaining) != nil {
+                remaining = defaults.double(forKey: Keys.sessionTimerRemaining)
+            } else {
+                // Legacy absolute end → convert to remaining active time.
+                let rawEnd = defaults.double(forKey: Keys.sessionTimerEnd)
+                guard rawEnd > 0 else {
+                    persistSessionState()
+                    return
+                }
+                remaining = Date(timeIntervalSince1970: rawEnd).timeIntervalSinceNow
             }
-            let end = Date(timeIntervalSince1970: rawEnd)
-            guard end > Date() else {
-                // Timed session already finished while the app was closed.
+            guard remaining > 0 else {
                 mode = .paused
-                timerEnd = nil
+                timedRemainingSeconds = nil
                 persistSessionState()
                 return
             }
-            activate(restoringEnd: end)
+            activate(restoringRemaining: remaining)
         } else {
             activate()
         }
     }
 
     @discardableResult
-    private func expireIfNeeded() -> Bool {
-        guard mode == .activeTimed, let end = timerEnd, Date() >= end else { return false }
+    private func expireTimedSessionIfNeeded() -> Bool {
+        guard mode == .activeTimed, var remaining = timedRemainingSeconds else { return false }
+        remaining -= 1
+        timedRemainingSeconds = remaining
+        let shouldPersist = remaining <= 0 || Date().timeIntervalSince(lastTimedPersist) >= 15
+        if shouldPersist {
+            persistSessionState()
+            lastTimedPersist = Date()
+        }
+        guard remaining <= 0 else { return false }
         pause(endReason: .timer)
         if !notifiedExpiry {
             notifiedExpiry = true
@@ -327,7 +361,7 @@ final class AppController: ObservableObject {
     }
 
     private func shouldNudgeNow() -> Bool {
-        guard isActive, isTrusted else { return false }
+        guard isActive, isTrusted, !isScreenLocked else { return false }
         if mode == .activeTimed { return true }
         if workSchedule.enabled, !ScheduleEvaluator.isWithin(schedule: workSchedule) {
             return false
@@ -346,13 +380,44 @@ final class AppController: ObservableObject {
         }
     }
 
+    private func setScreenLocked(_ locked: Bool) {
+        guard isScreenLocked != locked else { return }
+        isScreenLocked = locked
+        if locked {
+            resetNudgeVerification()
+        }
+        persistSessionState()
+        reconcilePowerAssertion()
+    }
+
     private func observeWake() {
         wakeObserver = NSWorkspace.shared.notificationCenter.addObserver(
             forName: NSWorkspace.didWakeNotification,
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            Task { @MainActor in self?.expireIfNeeded() }
+            Task { @MainActor in
+                guard let self else { return }
+                self.setScreenLocked(ScreenLockMonitor.isLocked())
+            }
+        }
+    }
+
+    private func observeScreenLock() {
+        let center = DistributedNotificationCenter.default()
+        lockObserver = center.addObserver(
+            forName: ScreenLockMonitor.didLockNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.setScreenLocked(true) }
+        }
+        unlockObserver = center.addObserver(
+            forName: ScreenLockMonitor.didUnlockNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.setScreenLocked(false) }
         }
     }
 
@@ -360,6 +425,13 @@ final class AppController: ObservableObject {
         timer?.invalidate()
         if let wakeObserver {
             NSWorkspace.shared.notificationCenter.removeObserver(wakeObserver)
+        }
+        let center = DistributedNotificationCenter.default()
+        if let lockObserver {
+            center.removeObserver(lockObserver)
+        }
+        if let unlockObserver {
+            center.removeObserver(unlockObserver)
         }
         displayAssertion.release()
     }

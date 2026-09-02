@@ -20,6 +20,7 @@ extension AppController {
         case .paused:
             return L("status.paused.subtitle")
         case .waiting:
+            if isWaitingForScreenLock { return L("status.waiting.screen_lock") }
             if isWaitingForSchedule { return L("status.waiting.schedule") }
             if isWaitingForPresence { return L("status.waiting.presence") }
             return L("status.waiting.title")
@@ -40,6 +41,7 @@ extension AppController {
             let idle = DurationFormat.short(seconds: idleSeconds)
             return L("status.tooltip.paused \(idle)")
         case .waiting:
+            if isWaitingForScreenLock { return L("status.tooltip.waiting_screen_lock") }
             if isWaitingForSchedule { return L("status.tooltip.waiting_schedule") }
             if isWaitingForPresence { return L("status.tooltip.waiting_presence") }
             return L("status.tooltip.waiting")

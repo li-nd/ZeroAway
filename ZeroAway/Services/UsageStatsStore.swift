@@ -91,7 +91,8 @@ final class UsageStatsStore: ObservableObject {
             durationPreset: durationPreset,
             nudgeCount: 0,
             nudgeTimes: [],
-            endReason: nil
+            endReason: nil,
+            activeSeconds: 0
         )
         persistSoon()
     }
@@ -110,6 +111,13 @@ final class UsageStatsStore: ObservableObject {
         sessions.insert(live, at: 0)
         pruneExpired()
         persist()
+    }
+
+    /// Counts one second of unlocked session time toward the live record.
+    func tickActiveSecond() {
+        guard isEnabled, var live = liveSession else { return }
+        live.activeSeconds = (live.activeSeconds ?? 0) + 1
+        liveSession = live
     }
 
     func recordNudge(at date: Date = Date()) {
@@ -229,12 +237,12 @@ final class UsageStatsStore: ObservableObject {
         }
     }
 
-    func historySessions(limit: Int = 120) -> [UsageSessionRecord] {
+    func historySessions() -> [UsageSessionRecord] {
         var items = sessions
         if let live = liveSession {
             items.insert(live, at: 0)
         }
-        return Array(items.prefix(limit))
+        return items
     }
 
     // MARK: - Private
