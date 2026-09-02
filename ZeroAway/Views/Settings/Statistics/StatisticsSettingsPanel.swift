@@ -44,10 +44,10 @@ struct StatisticsSettingsPanel: View {
                     StatisticsHistoryView(
                         stats: stats,
                         confirmClear: $confirmClear,
-                        onSelectDay: { date in
-                            let day = calendar.startOfDay(for: date)
-                            focusedDay = min(max(day, earliestAllowedDay), latestAllowedDay)
-                        }
+                        focusedDay: $focusedDay,
+                        tick: tick,
+                        earliestAllowedDay: earliestAllowedDay,
+                        latestAllowedDay: latestAllowedDay
                     )
                 } else {
                     disabledEmptyState

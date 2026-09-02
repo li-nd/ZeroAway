@@ -30,14 +30,16 @@ enum StatsChartPeriod: Int, CaseIterable, Identifiable {
     case days7 = 7
     case days30 = 30
     case days90 = 90
+    case days180 = 180
 
     var id: Int { rawValue }
 
     var label: String {
         switch self {
         case .days7: return L("stats.period.7d")
-        case .days30: return L("stats.period.30d")
-        case .days90: return L("stats.period.90d")
+        case .days30: return L("stats.period.1m")
+        case .days90: return L("stats.period.3m")
+        case .days180: return L("stats.period.6m")
         }
     }
 }

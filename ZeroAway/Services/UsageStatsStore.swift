@@ -229,12 +229,12 @@ final class UsageStatsStore: ObservableObject {
         }
     }
 
-    func historySessions(limit: Int = 120) -> [UsageSessionRecord] {
+    func historySessions() -> [UsageSessionRecord] {
         var items = sessions
         if let live = liveSession {
             items.insert(live, at: 0)
         }
-        return Array(items.prefix(limit))
+        return items
     }
 
     // MARK: - Private
