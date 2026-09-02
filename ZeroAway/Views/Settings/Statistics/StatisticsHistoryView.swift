@@ -134,9 +134,9 @@ struct StatisticsHistoryView: View {
         HStack(spacing: 12) {
             Text(L("stats.history.col.when"))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(L("stats.history.col.duration"))
+            Text(L("stats.history.col.mode"))
                 .frame(width: 72, alignment: .leading)
-            Text(L("stats.history.col.length"))
+            Text(L("stats.history.col.duration"))
                 .frame(width: 72, alignment: .trailing)
             Text(L("stats.history.col.nudges"))
                 .frame(width: 64, alignment: .trailing)

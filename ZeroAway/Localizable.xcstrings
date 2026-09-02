@@ -27664,127 +27664,127 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الوضع"
+            "value": "المدة"
           }
         },
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Režim"
+            "value": "Doba"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modus"
+            "value": "Dauer"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mode"
+            "value": "Duration"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modo"
+            "value": "Duración"
           }
         },
         "fa": {
           "stringUnit": {
             "state": "translated",
-            "value": "حالت"
+            "value": "مدت"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mode"
+            "value": "Durée"
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "מצב"
+            "value": "משך"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mode"
+            "value": "Durasi"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modalità"
+            "value": "Durata"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "モード"
+            "value": "時間"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "모드"
+            "value": "시간"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modus"
+            "value": "Duur"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tryb"
+            "value": "Czas"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modo"
+            "value": "Duração"
           }
         },
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mod"
+            "value": "Durată"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Режим"
+            "value": "Длительность"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mod"
+            "value": "Süre"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Режим"
+            "value": "Тривалість"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chế độ"
+            "value": "Thời lượng"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "模式"
+            "value": "时长"
           }
         }
       }
@@ -37610,6 +37610,530 @@
           "stringUnit": {
             "state": "translated",
             "value": "3M"
+          }
+        }
+      }
+    },
+    "status.waiting.screen_lock": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشاشة مقفلة — الإبقاء متوقف مؤقتًا"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrazovka je zamčená — posunutí pozastavena"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildschirm gesperrt — Bewegungen pausiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen locked — nudges paused"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pantalla bloqueada: movimientos en pausa"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صفحه قفل است — حرکت‌ها متوقف شدند"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écran verrouillé — mouvements en pause"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "המסך נעול — ההזזות מושהות"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layar terkunci — dorongan dijeda"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schermo bloccato — movimenti in pausa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面ロック中 — ナッジを一時停止"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면 잠금 — 움직임 일시 중지"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scherm vergrendeld — nudges gepauzeerd"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran zablokowany — ruchy wstrzymane"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tela bloqueada — movimentos pausados"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ecran blocat — mișcările sunt întrerupte"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Экран заблокирован — nudges на паузе"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran kilitli — hareketler duraklatıldı"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Екран заблоковано — nudges на паузі"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Màn hình bị khóa — tạm dừng nudge"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕已锁定 — 已暂停微动"
+          }
+        }
+      }
+    },
+    "status.tooltip.waiting_screen_lock": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشاشة مقفلة. لن تتم محاكاة النشاط حتى فتح القفل."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrazovka je zamčená. Aktivita se nebude simulovat, dokud ji neodemknete."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildschirm ist gesperrt. Es wird keine Aktivität simuliert, bis du entsperrst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen is locked. Activity won’t be simulated until you unlock."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pantalla está bloqueada. No se simulará actividad hasta que la desbloquees."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صفحه قفل است. تا باز کردن قفل، فعالیت شبیه‌سازی نمی‌شود."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’écran est verrouillé. Aucune activité ne sera simulée tant qu’il n’est pas déverrouillé."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "המסך נעול. לא תתבצע הדמיית פעילות עד שתפתח אותו."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layar terkunci. Aktivitas tidak akan disimulasikan sampai Anda membuka kunci."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo schermo è bloccato. L’attività non verrà simulata finché non lo sblocchi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面がロックされています。解除するまでアクティビティはシミュレートされません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면이 잠겨 있습니다. 잠금을 해제하기 전까지 활동이 시뮬레이션되지 않습니다."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scherm is vergrendeld. Er wordt geen activiteit gesimuleerd tot je ontgrendelt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran jest zablokowany. Aktywność nie będzie symulowana do odblokowania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A tela está bloqueada. A atividade não será simulada até você desbloquear."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ecranul este blocat. Activitatea nu va fi simulată până la deblocare."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Экран заблокирован. Активность не симулируется, пока вы не разблокируете."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran kilitli. Kilidi açana kadar etkinlik simüle edilmez."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Екран заблоковано. Активність не симулюється, доки ви не розблокуєте."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Màn hình đang khóa. Sẽ không giả lập hoạt động cho đến khi bạn mở khóa."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕已锁定。解锁前不会模拟活动。"
+          }
+        }
+      }
+    },
+    "menubar.caption.screen_lock": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشاشة مقفلة"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrazovka zamčená"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildschirm gesperrt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen locked"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pantalla bloqueada"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صفحه قفل است"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écran verrouillé"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "המסך נעול"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layar terkunci"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schermo bloccato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面ロック中"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면 잠금"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scherm vergrendeld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran zablokowany"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tela bloqueada"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ecran blocat"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Экран заблокирован"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran kilitli"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Екран заблоковано"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Màn hình bị khóa"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕已锁定"
+          }
+        }
+      }
+    },
+    "stats.history.col.mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوضع"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Režim"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حالت"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מצב"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modalità"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モード"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모드"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modus"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryb"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mod"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Режим"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mod"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Режим"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chế độ"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模式"
           }
         }
       }
